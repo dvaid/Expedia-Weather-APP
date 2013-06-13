@@ -13,34 +13,34 @@ Setting up the Maven Tomcat plugin consists of three steps -
 2. Add the manager credentials to your settings.xml
 3. Add the Maven Tomcat plugin to your POM file.
 
-e.g. for step1 <tomcat 6 installation folder>/conf/tomcat-users.xml
+e.g. for step1 &lt;tomcat 6 installation folder&gt;/conf/tomcat-users.xml
 
-<tomcat-users>
-  <role rolename="manager-gui"/>
-	<role rolename="manager-script"/>
-	<user username="admin" password="password" roles="manager-gui, manager-script"/>
-</tomcat-users>
+&lt;tomcat-users&gt;
+  &lt;role rolename="manager-gui"/&gt;
+	&lt;role rolename="manager-script"/&gt;
+	&lt;user username="admin" password="password" roles="manager-gui, manager-script"/&gt;
+&lt;/tomcat-users&gt;
 
-e.g. for step 2  /users/<username>/<.m2 installation folder>/settings.xml
-<servers>
-	  <server>
-		<id>myserver</id>
-		<username>admin</username>
-		<password>password</password>
-	</server>
-</servers>
+e.g. for step 2  /users/&lt;username&gt;/&lt;.m2 installation folder&gt;/settings.xml
+&lt;servers&gt;
+	  &lt;server&gt;
+		&lt;id&gt;myserver&lt;/id&gt;
+		&lt;username&gt;admin&lt;/username&gt;
+		&lt;password&gt;password&lt;/password&gt;
+	&lt;/server&gt;
+&lt;/servers&gt;
 
-e.g. for step 3 <your application folder>/pom.xml
-The Maven Tomcat Plugin is configured by adding the following XML to the <plugins> section of your project’s POM file:
-<plugin>
-	<groupId>org.codehaus.mojo</groupId>
-	<artifactId>tomcat-maven-plugin</artifactId>
-	<version>1.1</version>
-	<configuration>
-		<server>myserver</server>
-		<url>http://localhost:8080/manager/html</url>
-	</configuration>
-</plugin>
+e.g. for step 3 &lt;your application folder&gt;/pom.xml
+The Maven Tomcat Plugin is configured by adding the following XML to the &lt;plugins&gt; section of your project’s POM file:
+&lt;plugin&gt;
+	&lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;
+	&lt;artifactId&gt;tomcat-maven-plugin&lt;/artifactId&gt;
+	&lt;version&gt;1.1&lt;/version&gt;
+	&lt;configuration&gt;
+		&lt;server&gt;myserver&lt;/server&gt;
+		&lt;url&gt;http://localhost:8080/manager/html&lt;/url&gt;
+	&lt;/configuration&gt;
+&lt;/plugin&gt;
 
 ***************************************************
 
