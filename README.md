@@ -13,7 +13,7 @@ Setting up the Maven Tomcat plugin consists of three steps -
 2. Add the manager credentials to your settings.xml
 3. Add the Maven Tomcat plugin to your POM file.
 
-# e.g. for step1 <tomcat 6 installation folder>/conf/tomcat-users.xml
+e.g. for step1 <tomcat 6 installation folder>/conf/tomcat-users.xml
 
 <tomcat-users>
   <role rolename="manager-gui"/>
@@ -21,7 +21,7 @@ Setting up the Maven Tomcat plugin consists of three steps -
 	<user username="admin" password="password" roles="manager-gui, manager-script"/>
 </tomcat-users>
 
-# e.g. for step 2  /users/<username>/<.m2 installation folder>/settings.xml
+e.g. for step 2  /users/<username>/<.m2 installation folder>/settings.xml
 <servers>
 	  <server>
 		<id>myserver</id>
@@ -30,7 +30,7 @@ Setting up the Maven Tomcat plugin consists of three steps -
 	</server>
 </servers>
 
-# e.g. for step 3 <your application folder>/pom.xml
+e.g. for step 3 <your application folder>/pom.xml
 The Maven Tomcat Plugin is configured by adding the following XML to the <plugins> section of your project’s POM file:
 <plugin>
 	<groupId>org.codehaus.mojo</groupId>
@@ -38,7 +38,7 @@ The Maven Tomcat Plugin is configured by adding the following XML to the <plugin
 	<version>1.1</version>
 	<configuration>
 		<server>myserver</server>
-		<url>http://localhost:8080/manager/text</url>
+		<url>http://localhost:8080/manager/html</url>
 	</configuration>
 </plugin>
 
