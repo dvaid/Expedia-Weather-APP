@@ -1,0 +1,74 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<context:component-scan base-package="com.expedia.common" />
+
+	<mvc:annotation-driven />
+
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/pages/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>
+
+	<bean class="org.springframework.context.support.ResourceBundleMessageSource"
+		id="messageSource">
+		<property name="basename" value="messages" />
+	</bean>
+
+
+	<bean id="xstreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
+		<!-- Explicitly define the aliases -->
+		<property name="aliases">
+			<props>
+				<prop key="response">com.expedia.common.model.Response</prop>
+				<prop key="current_observation">com.expedia.common.model.CurrentObservation
+									</prop>
+				<prop key="observation_location">com.expedia.common.model.ObservationLocation
+									</prop>
+				<prop key="feature">com.expedia.common.model.Feature</prop>
+				<prop key="image">com.expedia.common.model.Image</prop>
+				<prop key="display_location">com.expedia.common.model.DisplayLocation</prop>
+			</props>
+		</property>
+
+		<!-- Tell XStream to find the alias names in the following classes -->
+		<property name="annotatedClasses">
+			<list>
+				<value>com.expedia.common.model.Response</value>
+				<value>com.expedia.common.model.CurrentObservation</value>
+				<value>com.expedia.common.model.ObservationLocation</value>
+				<value>com.expedia.common.model.Feature</value>
+				<value>com.expedia.common.model.Image</value>
+				<value>com.expedia.common.model.DisplayLocation</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+		<property name="messageConverters">
+			<list>
+				<!-- We only have one message converter for the RestTemplate, namely 
+					the XStream Marshller -->
+				<bean
+					class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+					<constructor-arg ref="xstreamMarshaller">
+					</constructor-arg>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+</beans>
