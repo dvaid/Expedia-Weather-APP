@@ -22,8 +22,8 @@ e.g. for step1 &lt;tomcat 6 installation folder&gt;/conf/tomcat-users.xml
 &lt;/tomcat-users&gt;
 
 e.g. for step 2  /users/&lt;username&gt;/&lt;.m2 installation folder&gt;/settings.xml
-&lt;servers&gt;
-	  &lt;server&gt;
+&lt;servers&gt
+	&lt;server&gt;
 		&lt;id&gt;myserver&lt;/id&gt;
 		&lt;username&gt;admin&lt;/username&gt;
 		&lt;password&gt;password&lt;/password&gt;
