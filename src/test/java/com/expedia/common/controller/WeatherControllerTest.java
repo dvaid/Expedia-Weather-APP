@@ -116,7 +116,7 @@ public class WeatherControllerTest {
 		final ModelAndView mav = handle(request, response);
 		final Weather weather = assertAndReturnModelAttributeOfType(mav,
 				"weather", Weather.class);
-		assertEquals("23451", weather.getZipCode());
+		assertEquals(new Integer(23451), weather.getZipCode());
 		/* if myForm is not valid */
 		assertViewName(mav, "WeatherForm");
 		final BindingResult errors = getBindingResult(mav, "weather");

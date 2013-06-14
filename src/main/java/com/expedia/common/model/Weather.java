@@ -1,8 +1,9 @@
 package com.expedia.common.model;
 
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.NumberFormat;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Range;
 
 public class Weather {
 
@@ -14,13 +15,28 @@ public class Weather {
 	@Override
 	public String toString() {
 		return "Weather [zipCode=" + zipCode + ", city=" + city + ", state="
-				+ state + ", currentTemp=" + currentTemp + "]";
+				+ state + ", currentTemp=" + currentTempF + "]";
 	}
 
-	@NotEmpty
-	@Length(min = 5, max = 5)
-	@NumberFormat
-	String zipCode;
+	@Digits(integer = 5, fraction = 0, message = "The value must be numeric and less than five digits")
+	@Range(min = 10000, max = 99999)
+	@NotNull
+	Integer zipCode;
+
+	/**
+	 * @return the zipCode
+	 */
+	public Integer getZipCode() {
+		return zipCode;
+	}
+
+	/**
+	 * @param zipCode
+	 *            the zipCode to set
+	 */
+	public void setZipCode(Integer zipCode) {
+		this.zipCode = zipCode;
+	}
 
 	String city;
 
@@ -57,20 +73,36 @@ public class Weather {
 	/**
 	 * @return the currentTemp
 	 */
-	public String getCurrentTemp() {
-		return currentTemp;
+	public String getCurrentTempF() {
+		return currentTempF;
 	}
 
 	/**
 	 * @param currentTemp
 	 *            the currentTemp to set
 	 */
-	public void setCurrentTemp(String currentTemp) {
-		this.currentTemp = currentTemp;
+	public void setCurrentTempF(String currentTemp) {
+		this.currentTempF = currentTemp;
 	}
 
 	String state;
-	String currentTemp;
+	String currentTempF;
+	private String currentTempC;
+
+	/**
+	 * @return the currentTempC
+	 */
+	public String getCurrentTempC() {
+		return currentTempC;
+	}
+
+	/**
+	 * @param currentTempC
+	 *            the currentTempC to set
+	 */
+	public void setCurrentTempC(String currentTempC) {
+		this.currentTempC = currentTempC;
+	}
 
 	private String errorDesc;
 
@@ -79,21 +111,6 @@ public class Weather {
 	 */
 	public String getErrorDesc() {
 		return errorDesc;
-	}
-
-	/**
-	 * @return the zipCode
-	 */
-	public String getZipCode() {
-		return zipCode;
-	}
-
-	/**
-	 * @param zipCode
-	 *            the zipCode to set
-	 */
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
 	}
 
 	/**
