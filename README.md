@@ -47,4 +47,5 @@ You can now start your server and run a Maven build using the "mvn install tomca
 
 ***************************************************
 JSON Request - http://http://localhost:8080/ExpediaWeatherApp/weather/retrieve/json
+
 XML Request - http://http://localhost:8080/ExpediaWeatherApp/weather/retrieve/xml
