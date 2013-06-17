@@ -9,7 +9,7 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-	<context:component-scan base-package="com.expedia.common" />
+	<context:component-scan base-package="com.expedia" />
 
 	<mvc:annotation-driven />
 
@@ -34,26 +34,26 @@
 		<!-- Explicitly define the aliases -->
 		<property name="aliases">
 			<props>
-				<prop key="response">com.expedia.common.model.Response</prop>
-				<prop key="current_observation">com.expedia.common.model.CurrentObservation
+				<prop key="response">com.expedia.model.Response</prop>
+				<prop key="current_observation">com.expedia.model.CurrentObservation
 									</prop>
-				<prop key="observation_location">com.expedia.common.model.ObservationLocation
+				<prop key="observation_location">com.expedia.model.ObservationLocation
 									</prop>
-				<prop key="feature">com.expedia.common.model.Feature</prop>
-				<prop key="image">com.expedia.common.model.Image</prop>
-				<prop key="display_location">com.expedia.common.model.DisplayLocation</prop>
+				<prop key="feature">com.expedia.model.Feature</prop>
+				<prop key="image">com.expedia.model.Image</prop>
+				<prop key="display_location">com.expedia.model.DisplayLocation</prop>
 			</props>
 		</property>
 
 		<!-- Tell XStream to find the alias names in the following classes -->
 		<property name="annotatedClasses">
 			<list>
-				<value>com.expedia.common.model.Response</value>
-				<value>com.expedia.common.model.CurrentObservation</value>
-				<value>com.expedia.common.model.ObservationLocation</value>
-				<value>com.expedia.common.model.Feature</value>
-				<value>com.expedia.common.model.Image</value>
-				<value>com.expedia.common.model.DisplayLocation</value>
+				<value>com.expedia.model.Response</value>
+				<value>com.expedia.model.CurrentObservation</value>
+				<value>com.expedia.model.ObservationLocation</value>
+				<value>com.expedia.model.Feature</value>
+				<value>com.expedia.model.Image</value>
+				<value>com.expedia.model.DisplayLocation</value>
 			</list>
 		</property>
 	</bean>
@@ -64,8 +64,11 @@
 					the XStream Marshller -->
 				<bean
 					class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
-					<constructor-arg ref="xstreamMarshaller">
-					</constructor-arg>
+					<constructor-arg ref="xstreamMarshaller" />
+				</bean>
+				<bean id="jsonConverter"
+					class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+					<property name="supportedMediaTypes" value="application/json" />
 				</bean>
 			</list>
 		</property>

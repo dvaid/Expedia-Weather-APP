@@ -25,7 +25,7 @@
 <body>
 	<div id="main">
 		<h2>Weather By ZIP</h2>
-		<spring:url var="action" value='/weather/retrieve' />
+		<spring:url var="action" value='/weather/retrieve/json' />
 		<form:form method="POST" commandName="weather" action="${action}">
 			<form:errors path="*" cssClass="errorblock" element="div" />
 			<table>
