@@ -46,6 +46,6 @@ The Maven Tomcat Plugin is configured by adding the following XML to the &lt;plu
 You can now start your server and run a Maven build using the "mvn install tomcat:deploy" command. Once installed, switch to the "tomcat:redeploy" goal.
 
 ***************************************************
-JSON Request - http://http://localhost:8080/ExpediaWeatherApp/weather/retrieve/json
+JSON Request - http://localhost:8080/ExpediaWeatherApp/weather/retrieve/json
 
-XML Request - http://http://localhost:8080/ExpediaWeatherApp/weather/retrieve/xml
+XML Request - http://localhost:8080/ExpediaWeatherApp/weather/retrieve/xml
