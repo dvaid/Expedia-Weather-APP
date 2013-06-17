@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -49,9 +50,12 @@ public class WunderGroundClient implements RESTServiceClient {
 	/**
 	 * The base URL of the wunderground web service
 	 */
-	public static final String WEATHER_SERVICE_XML_URL = "http://api.wunderground.com/api/{apiKey}/conditions/q/{zip}.xml";
-	public static final String WEATHER_SERVICE_JSON_URL = "http://api.wunderground.com/api/{apiKey}/conditions/q/{zip}.json";
-	public static final String WEATHER_API = "ed044d75b91fb500";
+	@Value("#{wunderGroundClient['url.webservice.xml']}")
+	private String weatherServiceXmlUrl;
+	@Value("#{wunderGroundClient['url.webservice.json']}")
+	private String weatherServiceJsonUrl;
+	@Value("#{wunderGroundClient['url.webservice.api']}")
+	private String weatherApi;
 
 	/*
 	 * (non-Javadoc)
@@ -75,9 +79,9 @@ public class WunderGroundClient implements RESTServiceClient {
 					headers);
 			try {
 				System.out.println("Hitting weather service!");
-				responseEntity = restTemplate.exchange(WEATHER_SERVICE_XML_URL,
-						HttpMethod.GET, httpEntity, Response.class,
-						WEATHER_API, weather.getZipCode());
+				responseEntity = restTemplate.exchange(weatherServiceXmlUrl,
+						HttpMethod.GET, httpEntity, Response.class, weatherApi,
+						weather.getZipCode());
 				Response weatherResponse = responseEntity.getBody();
 				ApplicationUtil.assemble(weatherResponse, weather);
 
@@ -114,10 +118,11 @@ public class WunderGroundClient implements RESTServiceClient {
 			HttpEntity<Weather> httpEntity = new HttpEntity<Weather>(null,
 					headers);
 			try {
-				System.out.println("Hitting weather service for JSON response!");
-				responseEntity = restTemplate.exchange(WEATHER_SERVICE_JSON_URL,
+				System.out
+						.println("Hitting weather service for JSON response!");
+				responseEntity = restTemplate.exchange(weatherServiceJsonUrl,
 						HttpMethod.GET, httpEntity, ResponseJSON.class,
-						WEATHER_API, weather.getZipCode());
+						weatherApi, weather.getZipCode());
 				ResponseJSON weatherResponse = responseEntity.getBody();
 				System.out.println("weatherResponse --> " + weatherResponse);
 				ApplicationUtil.assembleJSON(weatherResponse, weather);
