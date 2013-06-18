@@ -32,57 +32,7 @@ public class CurrentObservationJSON {
 	private String tempF;
 	@JsonProperty("temp_c")
 	private String tempC;
-
-
-	/**
-	 * @return the forecast_url
-	 */
-	public String getForecast_url() {
-		return forecast_url;
-	}
-
-	/**
-	 * @param forecast_url
-	 *            the forecast_url to set
-	 */
-	public void setForecast_url(String forecast_url) {
-		this.forecast_url = forecast_url;
-	}
-
-	/**
-	 * @return the history_url
-	 */
-	public String getHistory_url() {
-		return history_url;
-	}
-
-	/**
-	 * @param history_url
-	 *            the history_url to set
-	 */
-	public void setHistory_url(String history_url) {
-		this.history_url = history_url;
-	}
-
-	/**
-	 * @return the ob_url
-	 */
-	public String getOb_url() {
-		return ob_url;
-	}
-
-	/**
-	 * @param ob_url
-	 *            the ob_url to set
-	 */
-	public void setOb_url(String ob_url) {
-		this.ob_url = ob_url;
-	}
-
-	private String forecast_url;
-	private String history_url;
-	private String ob_url;
-
+	
 	/**
 	 * @return the observationLocation
 	 */

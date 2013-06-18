@@ -111,7 +111,7 @@ public class WeatherControllerTest {
 	@Test
 	public void testPost() throws Exception {
 		request.setMethod("POST");
-		request.setRequestURI("/weather/retrieve");
+		request.setRequestURI("/weather/retrieve/xml");
 		request.setParameter("zipCode", "23451");
 		final ModelAndView mav = handle(request, response);
 		final Weather weather = assertAndReturnModelAttributeOfType(mav,

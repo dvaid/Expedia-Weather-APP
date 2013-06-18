@@ -1,8 +1,8 @@
 /**
- * Response.java
+ * ResponseWrapper.java
  *
  * Created by Di007Va
- * Created on Jun 12, 2013
+ * Created on Jun 18, 2013
  * 
  * 
  * Copyright (c) 2013 Symbiont Softwares
@@ -24,9 +24,10 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
  * @author Di007Va
  * 
  */
+
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ResponseJSON {
+public class ResponseWrapper {
 
 	private ResponseJSON response;
 
@@ -38,7 +39,8 @@ public class ResponseJSON {
 	}
 
 	/**
-	 * @param response the response to set
+	 * @param response
+	 *            the response to set
 	 */
 	public void setResponse(ResponseJSON response) {
 		this.response = response;
@@ -88,8 +90,8 @@ public class ResponseJSON {
 	 */
 	@Override
 	public String toString() {
-		return "ResponseJSON [error=" + error + ", currentObservation="
-				+ currentObservation + "]";
+		return "ResponseWrapper [response=" + response + ", error=" + error
+				+ ", currentObservation=" + currentObservation + "]";
 	}
 
 }

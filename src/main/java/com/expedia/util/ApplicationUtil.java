@@ -16,7 +16,7 @@
 package com.expedia.util;
 
 import com.expedia.model.Response;
-import com.expedia.model.ResponseJSON;
+import com.expedia.model.ResponseWrapper;
 import com.expedia.model.Weather;
 
 /**
@@ -51,12 +51,13 @@ public class ApplicationUtil {
 	 * @param weatherResponse
 	 * @param weather
 	 */
-	public static void assembleJSON(ResponseJSON weatherResponse,
+	public static void assembleJSON(ResponseWrapper weatherResponse,
 			Weather weather) {
-
-		if (null != weatherResponse.getError()
-				&& null != weatherResponse.getError().getDescription()) {
-			weather.setErrorDesc(weatherResponse.getError().getDescription());
+		System.out.println(" weatherResponse.getError() :: "
+				+ weatherResponse.getResponse().getError() + " ! !!!!  ! !");
+		if (null != weatherResponse.getResponse().getError()
+				&& null != weatherResponse.getResponse().getError().getDescription()) {
+			weather.setErrorDesc(weatherResponse.getResponse().getError().getDescription());
 		} else {
 			weather.setCity(weatherResponse.getCurrentObservation()
 					.getObservationLocation().getCity());

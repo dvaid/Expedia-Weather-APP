@@ -30,7 +30,7 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestOperations;
 
 import com.expedia.model.Response;
-import com.expedia.model.ResponseJSON;
+import com.expedia.model.ResponseWrapper;
 import com.expedia.model.Weather;
 import com.expedia.util.ApplicationUtil;
 
@@ -106,7 +106,7 @@ public class WunderGroundClient implements RESTServiceClient {
 	 */
 	@Override
 	public Object getJSONResponse(Object request) {
-		ResponseEntity<ResponseJSON> responseEntity = null;
+		ResponseEntity<ResponseWrapper> responseEntity = null;
 		Weather weather = null;
 
 		if (request instanceof Weather) {
@@ -121,9 +121,9 @@ public class WunderGroundClient implements RESTServiceClient {
 				System.out
 						.println("Hitting weather service for JSON response!");
 				responseEntity = restTemplate.exchange(weatherServiceJsonUrl,
-						HttpMethod.GET, httpEntity, ResponseJSON.class,
+						HttpMethod.GET, httpEntity, ResponseWrapper.class,
 						weatherApi, weather.getZipCode());
-				ResponseJSON weatherResponse = responseEntity.getBody();
+				ResponseWrapper weatherResponse = responseEntity.getBody();
 				System.out.println("weatherResponse --> " + weatherResponse);
 				ApplicationUtil.assembleJSON(weatherResponse, weather);
 
