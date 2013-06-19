@@ -26,13 +26,11 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestOperations;
 
 import com.expedia.model.Response;
 import com.expedia.model.ResponseWrapper;
 import com.expedia.model.Weather;
-import com.expedia.util.ApplicationUtil;
 
 /**
  * @author Di007Va
@@ -55,7 +53,7 @@ public class WunderGroundClient implements RESTServiceClient {
 	@Value("#{wunderGroundClient['url.webservice.json']}")
 	private String weatherServiceJsonUrl;
 	@Value("#{wunderGroundClient['url.webservice.api']}")
-	private String weatherApi;
+	private String weatherApiKey;
 
 	/*
 	 * (non-Javadoc)
@@ -65,7 +63,7 @@ public class WunderGroundClient implements RESTServiceClient {
 	 * Object)
 	 */
 	@Override
-	public Object getXMLResponse(Object request) {
+	public ResponseEntity<Response> getXMLResponse(Object request) {
 		ResponseEntity<Response> responseEntity = null;
 		Weather weather = null;
 
@@ -80,21 +78,14 @@ public class WunderGroundClient implements RESTServiceClient {
 			try {
 				System.out.println("Hitting weather service!");
 				responseEntity = restTemplate.exchange(weatherServiceXmlUrl,
-						HttpMethod.GET, httpEntity, Response.class, weatherApi,
+						HttpMethod.GET, httpEntity, Response.class, weatherApiKey,
 						weather.getZipCode());
-				Response weatherResponse = responseEntity.getBody();
-				ApplicationUtil.assemble(weatherResponse, weather);
-
-			} catch (HttpStatusCodeException e) {
-				e.printStackTrace();
-				weather.setErrorDesc("Get failed with HttpStatusCode: "
-						+ e.getStatusCode() + "|" + e.getStatusText());
 			} catch (RuntimeException e) {
 				e.printStackTrace();
 				weather.setErrorDesc("Get failed" + e.getMessage());
 			}
 		}
-		return weather;
+		return responseEntity;
 	}
 
 	/*
@@ -105,7 +96,7 @@ public class WunderGroundClient implements RESTServiceClient {
 	 * .Object)
 	 */
 	@Override
-	public Object getJSONResponse(Object request) {
+	public ResponseEntity<ResponseWrapper> getJSONResponse(Object request) {
 		ResponseEntity<ResponseWrapper> responseEntity = null;
 		Weather weather = null;
 
@@ -122,21 +113,13 @@ public class WunderGroundClient implements RESTServiceClient {
 						.println("Hitting weather service for JSON response!");
 				responseEntity = restTemplate.exchange(weatherServiceJsonUrl,
 						HttpMethod.GET, httpEntity, ResponseWrapper.class,
-						weatherApi, weather.getZipCode());
-				ResponseWrapper weatherResponse = responseEntity.getBody();
-				System.out.println("weatherResponse --> " + weatherResponse);
-				ApplicationUtil.assembleJSON(weatherResponse, weather);
-
-			} catch (HttpStatusCodeException e) {
-				e.printStackTrace();
-				weather.setErrorDesc("Get failed with HttpStatusCode: "
-						+ e.getStatusCode() + "|" + e.getStatusText());
+						weatherApiKey, weather.getZipCode());
 			} catch (RuntimeException e) {
 				e.printStackTrace();
 				weather.setErrorDesc("Get failed" + e.getMessage());
 			}
 		}
-		return weather;
+		return responseEntity;
 	}
 
 }
