@@ -52,6 +52,13 @@ public class WunderGroundClient implements RESTServiceClient {
 	private String weatherServiceXmlUrl;
 	@Value("#{wunderGroundClient['url.webservice.json']}")
 	private String weatherServiceJsonUrl;
+	/**
+	 * @return the restTemplate
+	 */
+	public RestOperations getRestTemplate() {
+		return restTemplate;
+	}
+
 	@Value("#{wunderGroundClient['url.webservice.api']}")
 	private String weatherApiKey;
 
